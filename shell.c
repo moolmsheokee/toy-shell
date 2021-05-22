@@ -6,12 +6,38 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <pwd.h>
+#include <time.h> //time(), localtime(), asctime()
 
+#define MAX 255
 #define LEN_HOSTNAME    30
 #define MAX_LEN_LINE    100
 
+void *prompt(char xBuf[])
+{
+    time_t rawtime;
+    struct tm *timeinfo;
+    char *now;
+    void *ret;
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    now = asctime(timeinfo);
+    
+    now[strlen(now)-1] = 0;
+    
+    printf("Time: [%s]", now);
+    
+    ret = fgets(xBuf, MAX, stdin);
+    
+    if(xBuf[strlen(xBuf)-1] == '\n')
+        xBuf[strlen(xBuf)-1] = 0;
+    
+    return ret;
+}
+
 int main(void)
 {
+    char xBuf[MAX], yBuf[MAX];
     char hostname[LEN_HOSTNAME + 1];
     char command[MAX_LEN_LINE];
     char *args[] = {command, NULL};
@@ -22,7 +48,11 @@ int main(void)
     printf("username: %s\n", getpwuid(getuid())->pw_name);
     gethostname(hostname, LEN_HOSTNAME);
     printf("hostname: %s\n", hostname);
+    getcwd(yBuf, MAX);
+    printf("directoryname: %s\n", yBuf);
     
+    while(prompt(xBuf))
+    {
     while (true) {
         char *s;
         int len;
@@ -75,6 +105,8 @@ int main(void)
                 return 1;
             }
         } 
+    }
+    exit(0);
     }
     return 0;
 }
