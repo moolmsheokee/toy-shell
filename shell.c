@@ -57,15 +57,16 @@ int main(void)
         char *s;
         int len;
         
-        printf("MyShell $ ");
+        printf("%c[1;31mMyShell $ ",27);  //빨간색으로 변경
+        printf("%c[1;36m",27); //밝은 파랑색으로 변경
         s = fgets(command, MAX_LEN_LINE, stdin);
         
         //exit\n과 같으면 프로그램 종료
         if (strcmp(command, "exit\n")==0)
         {
-            printf("%c[1;32m",27); //색 변경, 27=아스키코드 ESC
+            printf("%c[1;32m",27); // 녹색으로 변경, 27=아스키코드 ESC
             printf("Exit MyShell\n");
-            printf("%c[0m\n",27); //원래의 색으로 변경
+            printf("%c[0m\n",27); //원래의 색()으로 변경
             break;
         }
         
