@@ -4,5 +4,8 @@ My OS Environment is wsl2
 
 Changes
 
-1. Outputs 'Hostname' and 'username'
-2. Exit Myshell when user inputs 'exit' and print "Exit MyShell" with green color
+1. Outputs 'Hostname' and 'username' and 'directory name' (with memset, gethostname, getcwd)
+2. Outputs Time when it was running. (with void function)
+3. When user inputs 'exit', shell will be ended and print "Exit MyShell" with green color
+   (30 = light gray, 31 = red, 32 = green, 33 = yellow, 34 = blue, 35 = violet, 36 = cyan, 37 = white)
+4. 
