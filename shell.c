@@ -51,7 +51,7 @@ int main(void)
     getcwd(yBuf, MAX);
     printf("directoryname: %s\n", yBuf);
     
-    while(prompt(xBuf));
+    while(prompt(xBuf))
     {
     while (true) {
         char *s;
