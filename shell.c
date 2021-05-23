@@ -51,11 +51,12 @@ int main(void)
     getcwd(yBuf, MAX);
     printf("directoryname: %s\n", yBuf);
     
-    while(prompt(xBuf))
+    while(prompt(xBuf));
     {
     while (true) {
         char *s;
         int len;
+        char bin[50] = "/bin/";
         
         printf("%c[1;31mMyShell $ ",27);  //빨간색으로 변경
         printf("%c[1;36m",27); //밝은 파랑색으로 변경
@@ -100,7 +101,8 @@ int main(void)
             }
         }
         else {  /* child */
-            ret = execve(args[0], args, NULL);
+            strcat(bin, command); // /bin/command로 문자열 합침
+            ret = execve(bin, args, NULL);
             if (ret < 0) {
                 fprintf(stderr, "execve failed\n");   
                 return 1;
